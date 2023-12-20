@@ -141,16 +141,12 @@ def hide_data_in_image(image_path, binary_data):
     binary_data_index = 0
     new_pixels = []
     for pixel in pixels:
-        if image.mode == 'RGB':
-            new_pixel = list(pixel)  # RGB modunda piksel zaten bir tuple'dır
-        else:
-            new_pixel = [pixel]  # Diğer modlarda pikseli bir liste içine al
-        for i in range(len(new_pixel)):
+        new_pixel = list(pixel)
+        for i in range(3):
             if binary_data_index < len(binary_bits):
+                # Bitleri piksellerin en az anlamlı bitlerine yerleştir
                 new_pixel[i] = new_pixel[i] & ~1 | int(binary_bits[binary_data_index], 2)
                 binary_data_index += 1
-            else:
-                break  # Tüm binary_bits işlendiyse döngüden çık
         new_pixels.append(tuple(new_pixel))
 
     new_image = Image.new(image.mode, image.size)
