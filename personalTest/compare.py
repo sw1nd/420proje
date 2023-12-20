@@ -51,8 +51,8 @@ def compare_image_bits_except_lsb(image_path1, image_path2):
     return non_lsb_differences
 
 # Fonksiyonu test et
-image_path_1 = 'deneme.bmp'
-image_path_2 = 'rere.bmp'
+image_path_1 = 'personalTest/deneme.bmp'
+image_path_2 = 'personalTest/rere.bmp'
 difference_count = compare_image_bits_except_lsb(image_path_1, image_path_2)
 print(f"Total non-LSB differences: {difference_count}")
 

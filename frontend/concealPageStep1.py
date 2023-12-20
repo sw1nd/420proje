@@ -49,7 +49,6 @@ class PageOne(tk.Frame):
         self.next_button.grid(row=3, column=1, sticky='ew', padx=5, pady=5)
 
 
-        # Grid configuration for resizing
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(1, weight=1)
@@ -104,13 +103,11 @@ class PageOne(tk.Frame):
             photo = ImageTk.PhotoImage(img)
             self.controller.shared_data['max_size_kb']  = (img.width * img.height * 3) // 8 // 1024
             self.controller.shared_data['file_path']  = file_path
-            # Update the image label
             self.image_label.configure(image=photo)
-            self.image_label.image = photo  # type: ignore # Keep a reference so it's not garbage collected
+            self.image_label.image = photo  # type: ignore 
             self.audio_widget.grid_remove()  # Ses widget'ını gizle
             self.image_label.grid()  # Resim widget'ını göster
             self.next_button['state'] = 'normal'
-            # Update the details text
             self.details_text.configure(text=image_details)
       
           
@@ -118,7 +115,6 @@ class PageOne(tk.Frame):
         if file_path:
             signal, time, details,frames,channels = load_wave_file(file_path)
             
-            # Calculate the maximum size of data that can be hidden in the audio (in kilobytes)
             audio_size_kb = (frames * channels) // 8 // 1024
             self.controller.shared_data['max_size_kb'] = audio_size_kb
             self.controller.shared_data['file_path']  = file_path

@@ -87,5 +87,4 @@ class MainApp(tk.Tk):
         frame.tkraise()   
          
     def quit_app(self):
-        # This will destroy the main window and terminate the application
         self.destroy()

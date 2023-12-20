@@ -84,12 +84,9 @@ class PageTwo(tk.Frame):
         self.remaining_size_label.config(text=f"Remaining KB: {self.max_size_kb}")    
 
     def add_file(self):
-        # Restrict file dialog to txt files only
         file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
         if file_path:
-            # Get file size in bytes and convert to kilobytes
             file_size_kb = calculate_file_structure_size(file_path) /8 / 1024
-            # Check if the new file size exceeds the maximum limits 
             if self.current_size_kb + file_size_kb <= self.max_size_kb:
                 self.current_size_kb += file_size_kb
                 file_name = os.path.basename(file_path)
@@ -110,15 +107,13 @@ class PageTwo(tk.Frame):
             file_name = values[1]
             file_size_kb = float(values[2])
 
-            # Subtract the file size from the current size
             self.current_size_kb -= file_size_kb
 
-            # Remove the file from the tree and the file list
             self.tree.delete(selected_item)
             self.files = [file for file in self.files if file[1] != file_name]
-            # Update the remaining size label
+
             self.remaining_size_label.config(text=f"Remaining KB: {self.max_size_kb - self.current_size_kb:.2f}")
-            if not self.files:  # If no files are left, disable the next button
+            if not self.files:  
                 self.next_button['state'] = 'disabled'
             if 'txt_paths' in self.controller.shared_data:
                 self.controller.shared_data['txt_paths'] = [path for path in self.controller.shared_data['txt_paths'] if os.path.basename(path) != file_name]

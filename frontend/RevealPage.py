@@ -33,10 +33,8 @@ class RevealPage(tk.Frame):
 
         self.download_button = tk.Button(self, text="Download", command=self.on_download_clicked)
         self.download_button.grid(row=3, column=0, columnspan=2, pady=5, padx=5, sticky='ew')
-        
-        # Restrict to select only one item at a time in the Treeview
+
         self.file_tree.configure(selectmode='browse')
-        # Configure grid column expansion
         self.grid_columnconfigure(1, weight=1)
 
     def on_extract_clicked(self):
@@ -53,7 +51,6 @@ class RevealPage(tk.Frame):
             return
 
         try:
-            # Assuming extract_data_from_image returns a dictionary of extracted files
             if file_type == 'image':
                 extracted_files = extract_data_from_image(file_path, key)
             else:
@@ -79,7 +76,6 @@ class RevealPage(tk.Frame):
             messagebox.showerror("Error", "File content is not available.")
             return
         
-        # Ask user where to save the file
         file_path = filedialog.asksaveasfilename(
             initialfile=file_name,
             filetypes=[("All files", "*.*")],
@@ -87,9 +83,8 @@ class RevealPage(tk.Frame):
         )
         
         if not file_path:
-            return  # User cancelled the save operation
+            return 
         
-        # Save the content to the file
         with open(file_path, 'wb') as file:
             file.write(file_content)
         
@@ -97,6 +92,6 @@ class RevealPage(tk.Frame):
         
     def populate_file_tree_with_extracted_data(self, extracted_data):
         for file_name, content in extracted_data.items():
-            file_size_kb = len(content) / 1024  # Assuming content is in bytes
+            file_size_kb = len(content) / 1024  
             self.file_tree.insert("", "end", values=('txt', file_name, f"{file_size_kb:.2f}"))
             self.extracted_files = extracted_data 

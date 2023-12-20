@@ -11,14 +11,13 @@ class StartPage(tk.Frame):
         outline_frame.pack(padx=25, pady=55)
         main_frame = tk.Frame(outline_frame,background="white")
         main_frame.pack(padx=1, pady=1)
-        encryption_button_frame = tk.Frame(main_frame, background='black')  # Set the background color to black
-        encryption_button_frame.pack(padx=20, pady=8)  # Set padding to create the outline effect
-        decryption_button_frame = tk.Frame(main_frame, background='black')  # Set the background color to black
+        encryption_button_frame = tk.Frame(main_frame, background='black') 
+        encryption_button_frame.pack(padx=20, pady=8) 
+        decryption_button_frame = tk.Frame(main_frame, background='black') 
         decryption_button_frame.pack(padx=20, pady=8)
-        exit_button_frame = tk.Frame(main_frame, background='black')  # Set the background color to black
+        exit_button_frame = tk.Frame(main_frame, background='black') 
         exit_button_frame.pack(padx=20, pady=8)
-        # Create the button inside the container frame
-          # Small padding to let the frame's background act as an outline
+
         encryption_button = tk.Button(encryption_button_frame, text="Conceal Information", bg="white", fg="black",
                                     command=lambda: controller.show_frame("PageOne","conceal"),
                                     width=20, height=1, font=('Helvetica', '16'))
